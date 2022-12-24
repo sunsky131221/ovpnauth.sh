@@ -1,10 +1,8 @@
 #!/bin/sh
 
 # Config parameters
-
-conf="/usr/local/etc/ovpnauth.conf"
+conf="/etc/openvpn/ovpnauth.conf"
 logfile="/var/log/ovpnauth.log"
-
 # End of config parameters
 
 if [ "$1" = "" ] || [ "$1" = "help" ]
@@ -41,7 +39,7 @@ logenv(){
 
 envr="`echo `env``"
 userpass=`cat $1`
-username=`echo $userpass | awk '{print $1}'`
+username=`env | grep X509_0_CN | awk -F= '{print $2}'`
 password=`echo $userpass | awk '{print $2}'`
 
 # computing password md5
