@@ -20,8 +20,11 @@ make it executable (chmod +x) and make sure you can execute it
 3) for each user you want to register
 	3a) compute md5 checksum using this ovpnauth.sh md5 password
 	3b) add line in your ovpnauth.conf that reads like this:
-		username=[computed-md5-password]
-	    where [computed-md5-password] is md5 checksum you computed 
+		[X509_0_CN name]=[computed-md5-password]
+	X509_0_CN name can use command below:
+	# openssl x509 -in your_client_cert.crt -noout -text | grep "Subject: CN"
+	to get them.
+	[computed-md5-password] is md5 checksum you computed.
 
 4) edit ovpnauth.sh and make sure your conf path (path to ovpnauth.conf) is correct
 	4a) (optional) you can change your logfile path
